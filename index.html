@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+  <title>Invitación mágica - Cumple de Lucero</title>
+  <style>
+    :root{--bg1:#0b1020;--bg2:#120a1f;--paper:#f3e6c6;--ink:#2a1d0f;--gold:#d9b35f;--shadow: rgba(0,0,0,.35);}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;color:#fff;
+      background:radial-gradient(1200px 900px at 20% 10%, #1c2a55 0%, transparent 60%),
+      radial-gradient(900px 700px at 80% 30%, #3a124a 0%, transparent 55%),
+      linear-gradient(180deg, var(--bg1), var(--bg2));overflow-x:hidden;}
+    .stars{position:fixed; inset:0;opacity:.55;pointer-events:none;animation: twinkle 6s infinite ease-in-out;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.9) 50%, transparent 52%),
+        radial-gradient(1px 1px at 30% 80%, rgba(255,255,255,.8) 50%, transparent 52%),
+        radial-gradient(1px 1px at 70% 30%, rgba(255,255,255,.7) 50%, transparent 52%),
+        radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,.85) 50%, transparent 52%),
+        radial-gradient(1px 1px at 55% 15%, rgba(255,255,255,.6) 50%, transparent 52%),
+        radial-gradient(1px 1px at 45% 55%, rgba(255,255,255,.65) 50%, transparent 52%),
+        radial-gradient(1px 1px at 20% 50%, rgba(255,255,255,.75) 50%, transparent 52%),
+        radial-gradient(1px 1px at 80% 85%, rgba(255,255,255,.9) 50%, transparent 52%);}
+    @keyframes twinkle{0%,100%{opacity:.45; filter: blur(.1px)}50%{opacity:.75; filter: blur(.3px)}}
+    .wrap{max-width:980px;margin:0 auto;padding:22px 14px 60px;}
+    header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+    .badge{display:inline-flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid rgba(217,179,95,.35);
+      border-radius:999px;background: rgba(0,0,0,.18);backdrop-filter: blur(8px);box-shadow: 0 12px 30px var(--shadow);}
+    .badge .dot{width:10px;height:10px;border-radius:50%;background: var(--gold);box-shadow: 0 0 16px rgba(217,179,95,.8);}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    button{border:1px solid rgba(255,255,255,.22);background: rgba(255,255,255,.08);color:#fff;padding:10px 12px;border-radius:12px;cursor:pointer;
+      transition: transform .06s ease, background .2s ease;box-shadow: 0 12px 30px var(--shadow);}
+    button:hover{background: rgba(255,255,255,.12)} button:active{transform: translateY(1px)}
+    .card{border-radius:22px;padding:18px;background: rgba(0,0,0,.16);border:1px solid rgba(217,179,95,.22);backdrop-filter: blur(10px);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);overflow:hidden;}
+    .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:18px;}
+    @media (max-width:860px){.grid{grid-template-columns:1fr}}
+    .paper{border-radius:18px;background:radial-gradient(120px 90px at 20% 10%, rgba(255,255,255,.35), transparent 60%),
+      radial-gradient(160px 120px at 80% 40%, rgba(255,255,255,.25), transparent 60%),
+      linear-gradient(180deg, #f7edd2, var(--paper));color: var(--ink);padding:18px 18px 16px;border:1px solid rgba(42,29,15,.25);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.25);position:relative;}
+    .seal{position:absolute;right:14px;top:14px;width:54px;height:54px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #f2d58a, #b7862e);
+      box-shadow: 0 10px 22px rgba(0,0,0,.25), inset 0 0 0 2px rgba(255,255,255,.25);
+      display:grid;place-items:center;font-weight:900;color:#2a1d0f;letter-spacing:.5px;}
+    .title{font-family: ui-serif, Georgia, "Times New Roman", Times, serif;font-weight:800;font-size:26px;margin:4px 0 6px;line-height:1.05;}
+    .subtitle{opacity:.9;margin:0 0 10px;font-size:14px;}
+    .quote{margin:12px 0 14px;padding:12px 12px;border-left:4px solid rgba(183,134,46,.9);background: rgba(0,0,0,.04);
+      border-radius:10px;font-size:15px;line-height:1.35;white-space: pre-wrap;}
+    .meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+    .pill{border-radius:14px;padding:10px 12px;background: rgba(0,0,0,.06);border:1px dashed rgba(42,29,15,.28);font-size:13px;line-height:1.25;}
+    .pill b{display:block;font-size:12px;opacity:.75;margin-bottom:2px}
+    .stage{border-radius:18px;padding:14px;background: rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.04);overflow:hidden;position:relative;min-height:420px;}
+    .stage h3{margin:6px 0 10px;font-size:14px;letter-spacing:.2px;opacity:.9;}
+    .chars{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:12px;}
+    .char{border-radius:16px;padding:12px 12px 10px;background: rgba(0,0,0,.18);border:1px solid rgba(217,179,95,.18);
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);cursor:pointer;transition: transform .12s ease, border-color .2s ease, background .2s ease;user-select:none;}
+    .char:hover{transform: translateY(-2px);border-color: rgba(217,179,95,.38);background: rgba(0,0,0,.24);}
+    .row{display:flex;align-items:center;gap:10px;}
+    .avatar{width:42px;height:42px;border-radius:14px;background: rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);
+      display:grid;place-items:center;font-size:22px;box-shadow: inset 0 0 0 2px rgba(0,0,0,.12);}
+    .name{font-weight:800;font-size:14px;line-height:1.1;}
+    .role{font-size:12px;opacity:.78;margin-top:2px;}
+    .speech{margin-top:10px;font-size:13px;line-height:1.25;opacity:.95;min-height:44px;}
+    .fx{position:absolute;inset:0;pointer-events:none;overflow:hidden;}
+    .spark{position:absolute;width:8px;height:8px;border-radius:50%;background: rgba(217,179,95,.9);
+      box-shadow: 0 0 18px rgba(217,179,95,.8);animation: float 2.8s linear infinite;opacity:.8;}
+    @keyframes float{from{transform: translateY(60px) scale(.8); opacity:0}20%{opacity:.9}to{transform: translateY(-520px) scale(1.2); opacity:0}}
+    .footerNote{margin-top:12px;font-size:12px;opacity:.75;line-height:1.35;}
+    .small{font-size:12px;opacity:.8;}
+  </style>
+</head>
+<body>
+<div class="stars"></div>
+<div class="wrap">
+  <header>
+    <div class="badge">
+      <span class="dot"></span>
+      <div>
+        <b>Invitación mágica</b>
+        <div class="small">Cumpleaños de Lucero • 7 de febrero</div>
+      </div>
+    </div>
+    <div class="controls">
+      <button id="btnMusic">🔊 Música: ON</button>
+      <button id="btnConfetti">✨ Hechizo de chispitas</button>
+      <button id="btnCopy">📩 Copiar mensaje</button>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="grid">
+      <section class="paper">
+        <div class="seal">HP</div>
+        <div class="title">Carta de invitación</div>
+        <p class="subtitle">Tocá a los personajes para que te hablen ✨</p>
+
+        <div class="quote" id="mainText"></div>
+
+        <div class="meta">
+          <div class="pill"><b>📅 Fecha</b>7 de febrero</div>
+          <div class="pill"><b>📍 Lugar</b>Resto Saint Tropez</div>
+          <div class="pill"><b>🌭 Mascota oficial</b>Perro salchicha hechicero</div>
+          <div class="pill"><b>🔥 Snack oficial</b>Takis mágicos</div>
+        </div>
+
+        <div class="footerNote">
+          Tip: si abrís esto en el celu, queda como mini-app. (No usa internet.)
+        </div>
+      </section>
+
+      <aside class="stage">
+        <h3>Personajes (tocá para escuchar)</h3>
+        <div class="chars">
+          <div class="char" data-voice="narrator" data-line="">
+            <div class="row">
+              <div class="avatar">🧙‍♂️</div>
+              <div>
+                <div class="name">El mago con anteojos</div>
+                <div class="role">Invitador profesional</div>
+              </div>
+            </div>
+            <div class="speech">Tocame y te leo la invitación.</div>
+          </div>
+
+          <div class="char" data-voice="witch" data-line="Si no venís, te mando un hechizo de cosquillas hasta que digas que sí.">
+            <div class="row">
+              <div class="avatar">🧙‍♀️</div>
+              <div>
+                <div class="name">La bruja genia</div>
+                <div class="role">Organización & magia</div>
+              </div>
+            </div>
+            <div class="speech">Tocame. Soy la que sabe todo.</div>
+          </div>
+
+          <div class="char" data-voice="red" data-line="Traé regalo, traé ganas de reír, y traé hambre... porque hay Takis mágicos.">
+            <div class="row">
+              <div class="avatar">🧑‍🦰</div>
+              <div>
+                <div class="name">El pelirrojo gracioso</div>
+                <div class="role">Chistes & snack</div>
+              </div>
+            </div>
+            <div class="speech">Tocame si sos valiente 😄</div>
+          </div>
+
+          <div class="char" data-voice="dachshund" data-line="Guau guau. Soy el perro salchicha hechicero. Confirmo: ¡es el cumple más fantástico del año!">
+            <div class="row">
+              <div class="avatar">🌭</div>
+              <div>
+                <div class="name">Salchicha mágico</div>
+                <div class="role">Seguridad del evento</div>
+              </div>
+            </div>
+            <div class="speech">Guau (tocame).</div>
+          </div>
+        </div>
+        <div class="footerNote">Si tu celu no lee en voz alta, igual funciona como tarjeta animada ✨</div>
+        <div class="fx" id="fx"></div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<script>
+  const EXACT_TEXT = "Queridos alumnos de Hogwarts: estamos encantados de invitarlos este 7 de febrero en el Resto Saint Tropez al fantástico cumpleaños de Lucero. Ah, y por cierto: no olviden los regalos.";
+  document.getElementById("mainText").textContent = EXACT_TEXT;
+
+  const fx = document.getElementById('fx');
+  function sparkBurst(count=22){
+    const rect = fx.getBoundingClientRect();
+    for(let i=0;i<count;i++){
+      const s = document.createElement('div');
+      s.className = 'spark';
+      const x = Math.random() * rect.width;
+      const delay = Math.random() * 0.6;
+      const dur = 2.2 + Math.random()*1.8;
+      s.style.left = x + 'px';
+      s.style.bottom = (-10 - Math.random()*30) + 'px';
+      s.style.animationDelay = delay + 's';
+      s.style.animationDuration = dur + 's';
+      s.style.opacity = 0.4 + Math.random()*0.6;
+      fx.appendChild(s);
+      setTimeout(()=>s.remove(), (delay+dur)*1000 + 50);
+    }
+  }
+  document.getElementById('btnConfetti').addEventListener('click', ()=> sparkBurst(30));
+
+  document.getElementById('btnCopy').addEventListener('click', async ()=>{
+    try{
+      await navigator.clipboard.writeText(EXACT_TEXT);
+      toast("¡Copiado! 📩");
+    }catch(e){
+      toast("No pude copiar 😅");
+    }
+  });
+
+  const t = document.createElement('div');
+  t.style.position='fixed';t.style.left='50%';t.style.bottom='18px';t.style.transform='translateX(-50%)';
+  t.style.padding='10px 12px';t.style.borderRadius='12px';t.style.background='rgba(0,0,0,.55)';
+  t.style.border='1px solid rgba(255,255,255,.18)';t.style.backdropFilter='blur(10px)';
+  t.style.boxShadow='0 18px 60px rgba(0,0,0,.35)';t.style.opacity='0';
+  t.style.transition='opacity .18s ease';t.style.pointerEvents='none';t.style.zIndex='9999';
+  document.body.appendChild(t);
+  let toastTimer=null;
+  function toast(msg){t.textContent=msg;t.style.opacity='1';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.style.opacity='0', 1400);}
+
+  // Voz
+  let selectedVoice=null;
+  function pickSpanishVoice(){
+    const voices = speechSynthesis.getVoices();
+    const es = voices.filter(v => /es|Spanish/i.test(v.lang) || /es|Spanish/i.test(v.name));
+    selectedVoice = es[0] || voices[0] || null;
+  }
+  pickSpanishVoice();
+  speechSynthesis.onvoiceschanged = pickSpanishVoice;
+
+  function speak(text){
+    try{
+      speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = selectedVoice?.lang || 'es-ES';
+      if(selectedVoice) u.voice = selectedVoice;
+      u.rate = 1.02; u.pitch = 1.03; u.volume = 1;
+      speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  // Música mágica (no copyright)
+  let musicOn = true;
+  let audioCtx = null;
+  function startMusic(){
+    if(audioCtx) return;
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const master = audioCtx.createGain();
+    master.gain.value = 0.12;
+    master.connect(audioCtx.destination);
+
+    const osc1 = audioCtx.createOscillator();
+    osc1.type = 'sine'; osc1.frequency.value = 196;
+    const g1 = audioCtx.createGain(); g1.gain.value = 0.08;
+    osc1.connect(g1).connect(master);
+
+    const osc2 = audioCtx.createOscillator();
+    osc2.type = 'triangle'; osc2.frequency.value = 392;
+    const g2 = audioCtx.createGain(); g2.gain.value = 0.04;
+    osc2.connect(g2).connect(master);
+
+    const bell = audioCtx.createOscillator();
+    bell.type = 'sine';
+    const bellGain = audioCtx.createGain(); bellGain.gain.value = 0.0;
+    bell.connect(bellGain).connect(master);
+
+    const lfo = audioCtx.createOscillator();
+    lfo.type='sine'; lfo.frequency.value=5.2;
+    const lfoGain = audioCtx.createGain(); lfoGain.gain.value=3.5;
+    lfo.connect(lfoGain).connect(bell.frequency);
+
+    const scale = [392, 440, 523.25, 587.33, 659.25, 587.33, 523.25, 440];
+    let step = 0;
+    function tick(){
+      if(!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const f = scale[step % scale.length];
+      bell.frequency.setValueAtTime(f, now);
+      bellGain.gain.cancelScheduledValues(now);
+      bellGain.gain.setValueAtTime(0.0, now);
+      bellGain.gain.linearRampToValueAtTime(0.10, now + 0.01);
+      bellGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+      step++;
+      setTimeout(tick, 520 + (Math.random()*120));
+    }
+
+    osc1.start(); osc2.start(); bell.start(); lfo.start(); tick();
+  }
+  function stopMusic(){
+    if(!audioCtx) return;
+    try{speechSynthesis.cancel(); audioCtx.close();}catch(e){}
+    audioCtx = null;
+  }
+  function ensureMusic(){ if(musicOn) startMusic(); }
+
+  const btnMusic = document.getElementById('btnMusic');
+  btnMusic.addEventListener('click', ()=>{
+    musicOn = !musicOn;
+    btnMusic.textContent = musicOn ? "🔊 Música: ON" : "🔇 Música: OFF";
+    if(musicOn){ ensureMusic(); toast("Música ON ✨"); }
+    else{ stopMusic(); toast("Música OFF"); }
+  });
+
+  document.querySelectorAll('.char').forEach(el=>{
+    el.addEventListener('click', ()=>{
+      ensureMusic();
+      sparkBurst(18);
+      const voice = el.dataset.voice;
+      const line = (voice === "narrator") ? EXACT_TEXT : (el.dataset.line || "");
+      speak(line);
+    });
+  });
+
+  window.addEventListener('pointerdown', ()=> ensureMusic(), {once:true});
+</script>
+</body>
+</html>
